@@ -1,10 +1,13 @@
 language: node_js
 node_js: node
-services: mongodb
-# deploy:
-#     provider: heroku
-#     api_key:
-#       secure: [YOUR-API-KEY]
-#     app: [YOUR-APP-NAME]
-#     on:
-#       repo: [YOUR-APP-REPO]
+env:
+- NODE_ENV=test
+services:
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: UYVpYiLtFeqQJezj2MRjjzWccf8j4KdtXBFTdZ5VCLQph0zDZEMH1RlbnaDZ73cPncT3CsiBQaehf4LUCDBQslleGkw0TJxmaTltesPp2LhSXZ1tvZgFpiIIFSbRzxE7D8QFU7dtVwBMxZ7VXxOt0UkpLFoIcpD/QB+++nvHUmhJP/OHqKAfwj9hBY6XtZMdhmKTK+MJfslnoRXMQ1UaphGyemTDXM4H1EmF6BlggQY/lP9/aFRuclZjOJMlozhE8Q0xdX7ghQaYMS75NDltOIpF3bTv5LLAGtz3NhiH8L8guhJeOtAJ+0Hb3jxbuQqckhoq0JdsiQ5oOGBrssyQjk0rIxPOnE/wW69bBvB8WJU+R3peaJC2MQ1UXbkxT223TlgjTNBPRIeewG8M5WCjpP/5FfqplwKS9kHP56iet02dqyJDUOG2hItgdusEPcGONj1NgD2iSbQ7eFAy3zQtdJ9/AdvdbCAcejyvxXtytP6K/9PlCxlMLYmTmxOWpKVZiret7WPx42NIFLJXypGceUq95lqH9iFinm5k+Ic0xr8zUS4eqGLSaabsx4V8fcxVcdxy1g6gnmHwdpsvtN1x27QGCbPtuIWDBehdYbhROySsZSlj/m6/0EQoyyCMO+Rlb4LnUcTw01PvsaVxerjtqzC8RhsxfL5Jw48IR1MnlCs=
+  app: chris-noteful-v3
+  on:
+    repo: thinkful-ei19/chris-noteful-v3
