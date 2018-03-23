@@ -22,36 +22,39 @@ router.get('/notes', (req, res, next) => {
     filter = { folderId }
   }
 
-  
   if (tagId) {
-    Note.find(filter)
-      .sort('created')
-      .populate('folderId')
-      .populate('tags')
-      .then((results) => {
-        let arr = [];
-        results.forEach((item) => {
-          let check;
-          item.tags.forEach((tagItem) => {
-            check = false;
-            if (tagItem.id === tagId) {
-              check = true;
-            }
-            if (check === true) {
-              arr.push(item);
-            }
-          }) 
-        })
-        return arr;
-      })
-      .then((results) => {
-        console.log(results);
-        res.json(results);
-      })
-      .catch(err => {
-        next(err);
-    });
+    filter.tags = tagId;
   }
+
+  // if (tagId) {
+  //   Note.find(filter)
+  //     .sort('created')
+  //     .populate('folderId')
+  //     .populate('tags')
+  //     .then((results) => {
+  //       let arr = [];
+  //       results.forEach((item) => {
+  //         let check;
+  //         item.tags.forEach((tagItem) => {
+  //           check = false;
+  //           if (tagItem.id === tagId) {
+  //             check = true;
+  //           }
+  //           if (check === true) {
+  //             arr.push(item);
+  //           }
+  //         }) 
+  //       })
+  //       return arr;
+  //     })
+  //     .then((results) => {
+  //       console.log(results);
+  //       res.json(results);
+  //     })
+  //     .catch(err => {
+  //       next(err);
+  //   });
+  // }
   // if (tagId) {
   //   Note.find(filter)
   //     .then((results) => {
@@ -71,7 +74,7 @@ router.get('/notes', (req, res, next) => {
   //       next(err);
   //     });
   // } 
-  else {
+  // else {
     Note.find(filter)
     .sort('created')
     .populate('folderId')
@@ -82,7 +85,7 @@ router.get('/notes', (req, res, next) => {
     .catch(err => {
       next(err);
     });
-  }
+  // }
 });
 
 /* ========== GET/READ A SINGLE ITEM ========== */
