@@ -16,7 +16,6 @@ $(document).ready(function () {
       noteful.render();
     });
 
-  console.log('Get tags, coming soon...');
   api.search('/api/tags')
     .then(response => {
       store.tags = response;

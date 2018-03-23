@@ -22,11 +22,57 @@ router.get('/notes', (req, res, next) => {
     filter = { folderId }
   }
 
+  
   if (tagId) {
-    filter = { tagId }
+    Note.find(filter)
+      .sort('created')
+      .populate('folderId')
+      .populate('tags')
+      .then((results) => {
+        let arr = [];
+        results.forEach((item) => {
+          let check;
+          item.tags.forEach((tagItem) => {
+            check = false;
+            if (tagItem.id === tagId) {
+              check = true;
+            }
+            if (check === true) {
+              arr.push(item);
+            }
+          }) 
+        })
+        return arr;
+      })
+      .then((results) => {
+        console.log(results);
+        res.json(results);
+      })
+      .catch(err => {
+        next(err);
+    });
   }
-
-  Note.find(filter)
+  // if (tagId) {
+  //   Note.find(filter)
+  //     .then((results) => {
+  //       let arr = [];
+  //       results.forEach((item) => {
+  //         if (item.tags.indexOf(tagId) !== -1) {
+  //           arr.push(item);
+  //         }
+  //       })
+  //       return arr;
+  //     })
+  //     .then((results) => {
+  //       console.log(results);
+  //       res.json(results);
+  //     })
+  //     .catch(err => {
+  //       next(err);
+  //     });
+  // } 
+  else {
+    Note.find(filter)
     .sort('created')
     .populate('folderId')
     .populate('tags')
@@ -36,6 +82,7 @@ router.get('/notes', (req, res, next) => {
     .catch(err => {
       next(err);
     });
+  }
 });
 
 /* ========== GET/READ A SINGLE ITEM ========== */
